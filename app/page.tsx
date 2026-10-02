@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { ArrowLeft, ArrowRight, CalendarDays, Check, Clock3, HeartPulse, Leaf, MapPin, Menu, MessageCircle, Phone, Sparkles, X } from 'lucide-react'
@@ -18,6 +18,29 @@ const treatments = [
 const nav = ['About', 'Treatments', 'Our Doctor', 'Contact']
 
 function DoctorKid() {
+  const texture = useLoader(THREE.TextureLoader, 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-0gK2cyzNcX869NoFnsOm3nMD1EIDWH.png')
+  texture.colorSpace = THREE.SRGBColorSpace
+  return <sprite position={[0, 1.42, 1.08]} scale={[0.9, 1.65, 1]}><spriteMaterial map={texture} transparent alphaTest={0.05} depthWrite={false} /></sprite>
+}
+
+function FallingLeaves() {
+  const leaves = useRef<THREE.Group[]>([])
+  const positions = useRef([-2.2, -1.45, -0.75, 0.75, 1.45, 2.15].map((x, index) => ({ x, y: 1.7 + (index % 3) * 0.55, z: 0.35 + (index % 2) * 0.15, speed: 0.18 + (index % 3) * 0.06, phase: index * 1.3 })))
+  useFrame(({ clock }, delta) => {
+    const time = clock.getElapsedTime()
+    leaves.current.forEach((leaf, index) => {
+      const item = positions.current[index]
+      if (!leaf || !item) return
+      leaf.position.y -= delta * item.speed
+      leaf.position.x = item.x + Math.sin(time * 1.2 + item.phase) * 0.18
+      leaf.rotation.z += delta * 1.4
+      if (leaf.position.y < -1.75) leaf.position.y = 1.9 + (index % 2) * 0.4
+    })
+  })
+  return <group>{positions.current.map((item, index) => <group key={index} ref={(node) => { if (node) leaves.current[index] = node }} position={[item.x, item.y, item.z]} rotation={[0, 0, index * 0.7]}><mesh scale={[0.12, 0.28, 0.035]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color={index % 2 ? '#b8d9a8' : '#d0e5bb'} roughness={0.72} /></mesh><mesh scale={[0.018, 0.25, 0.05]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>)}</group>
+}
+
+function RemovedProceduralDoctorKid() {
   const leftArm = useRef<THREE.Group>(null)
   const rightArm = useRef<THREE.Group>(null)
   const leftLeg = useRef<THREE.Group>(null)
@@ -58,7 +81,7 @@ function GlobeScene() {
     <group ref={globe} position={[0, -0.16, 0]} scale={0.88}>
       <mesh><sphereGeometry args={[1.48, 64, 64]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
       <mesh scale={[1.01, 1.01, 1.01]}><sphereGeometry args={[1.48, 32, 32]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
-      <DoctorKid />
+      <FallingLeaves />
       <group position={[-1.45, 0.25, 0.25]} rotation={[0.1, 0.3, -0.55]}><mesh scale={[0.16, 0.48, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c7dfa9" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, 0.2]} scale={[0.02, 0.38, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
       <group position={[1.38, -0.38, 0.25]} rotation={[-0.2, -0.25, 0.55]}><mesh scale={[0.14, 0.42, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, -0.2]} scale={[0.02, 0.34, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
     </group>
@@ -67,7 +90,7 @@ function GlobeScene() {
 }
 
 function WellnessOrb() {
-  return <div className="wellness-orb-shell" aria-label="Rotating green wellness globe with a child doctor and medicinal leaves"><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5.4], fov: 35 }} gl={{ antialias: true, alpha: true }}><GlobeScene /></Canvas></div>
+  return <div className="wellness-orb-shell" aria-label="Rotating green wellness globe with a child doctor and medicinal leaves"><img className="reference-kid" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-0gK2cyzNcX869NoFnsOm3nMD1EIDWH.png" alt="Child doctor standing on the wellness globe" /><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5.4], fov: 35 }} gl={{ antialias: true, alpha: true }}><GlobeScene /></Canvas></div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

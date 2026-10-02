@@ -23,13 +23,16 @@ function DoctorKid() {
   const leftLeg = useRef<THREE.Group>(null)
   const rightLeg = useRef<THREE.Group>(null)
   useFrame(({ clock }) => {
-    const stride = Math.sin(clock.getElapsedTime() * 4.2) * 0.42
+    const stride = Math.sin(clock.getElapsedTime() * 5.2) * 0.52
+    const lift = Math.max(0, Math.sin(clock.getElapsedTime() * 5.2)) * 0.035
     if (leftArm.current) leftArm.current.rotation.z = -0.18 + stride
     if (rightArm.current) rightArm.current.rotation.z = 0.18 - stride
     if (leftLeg.current) leftLeg.current.rotation.z = stride * 0.8
     if (rightLeg.current) rightLeg.current.rotation.z = -stride * 0.8
+    if (leftLeg.current) leftLeg.current.position.y = lift
+    if (rightLeg.current) rightLeg.current.position.y = -lift
   })
-  return <group position={[0, 0.98, 0.28]} scale={0.46}>
+  return <group position={[0, 1.58, 0.82]} scale={0.34}>
     <mesh position={[0, 0.98, 0]}><sphereGeometry args={[0.34, 28, 20]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
     <mesh position={[0, 1.18, -0.05]} scale={[1.06, 0.58, 0.92]}><sphereGeometry args={[0.35, 28, 20]} /><meshStandardMaterial color="#263b35" roughness={0.9} /></mesh>
     <mesh position={[0, 0.42, 0]} scale={[0.6, 0.7, 0.34]}><capsuleGeometry args={[0.5, 0.7, 12, 20]} /><meshStandardMaterial color="#ffffff" roughness={0.55} /></mesh>
@@ -52,7 +55,7 @@ function GlobeScene() {
     <ambientLight intensity={1.6} />
     <directionalLight position={[3, 4, 5]} intensity={2.4} color="#fff6df" />
     <pointLight position={[-3, -2, 3]} intensity={2} color="#86bf91" />
-    <group ref={globe} position={[0, -0.58, 0]} scale={0.78}>
+    <group ref={globe} position={[0, -0.72, 0]} scale={0.66}>
       <mesh><sphereGeometry args={[1.48, 64, 64, 0, Math.PI * 2, 0, Math.PI / 2]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
       <mesh scale={[1.01, 1.01, 1.01]}><sphereGeometry args={[1.48, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
       <DoctorKid />

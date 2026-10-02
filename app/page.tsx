@@ -23,7 +23,7 @@ export default function Page() {
   const openDoctors = () => { setDoctorInfo(true); setMenu(false) }
 
   return (
-    <main className="min-h-screen bg-[#f7f5ef] text-[#173f39]">
+    <main className="clinic-glow min-h-screen overflow-x-hidden text-[#173f39]">
       <div className="bg-[#173f39] px-5 py-2.5 text-center text-[11px] font-medium tracking-wide text-[#e7eee5]">Ayurveda · Homoeopathy · Holistic Care <span className="mx-3 text-[#a6c2a8]">|</span> Open today 9:00 AM – 6:00 PM</div>
       <header className="sticky top-0 z-40 border-b border-[#dfe7dc] bg-[#f7f5ef]/95 backdrop-blur-lg">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">

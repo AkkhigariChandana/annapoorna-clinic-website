@@ -82,7 +82,7 @@ function GlobeScene() {
 }
 
 function WellnessOrb() {
-  return <div className="wellness-orb-shell" aria-label="Rotating green wellness globe with a child doctor and medicinal leaves"><img className="reference-kid" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-0gK2cyzNcX869NoFnsOm3nMD1EIDWH.png" alt="Child doctor standing on the wellness globe" /><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5.4], fov: 35 }} gl={{ antialias: true, alpha: true }}><GlobeScene /></Canvas></div>
+  return <div className="wellness-orb-shell supplied-orbit-hero" aria-label="Wellness globe with child doctor and medicinal leaves"><img className="supplied-orbit-image" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-rPbpoMZO2NTee1CFeAqlp2In3nocDO.png" alt="Child doctor standing on a green wellness globe with medicinal leaves" /></div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

@@ -58,6 +58,12 @@ function WellnessOrbScene() {
             <mesh position={[1.35, -0.8, 0.35]} rotation={[-0.25, -0.25, 0.55]} scale={[0.11, 0.42, 0.025]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c9784e" roughness={0.8} /></mesh>
             <mesh position={[0.95, 1.15, -0.25]} rotation={[0.1, 0.3, 0.8]} scale={[0.08, 0.3, 0.02]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#9bb7a2" roughness={0.8} /></mesh>
           </Float>
+          <Html position={[0, 1.9, 0.85]} center distanceFactor={5} zIndexRange={[10, 0]}>
+            <div className="doctor-orb-figure" aria-label="Ayurvedic doctor standing on the wellness orb">
+              <img src="/images/doctor-standing.png" alt="Ayurvedic doctor standing above the wellness orb" />
+              <span>Care that listens first</span>
+            </div>
+          </Html>
           <Html position={[0.85, -1.35, 0.6]} center distanceFactor={5}>
             <div className="orb-info-card"><span>Rooted in nature</span><strong>Simple care, thoughtfully chosen.</strong></div>
           </Html>

@@ -300,4 +300,47 @@
       transition: none;
     }
   }
+
+  .wellness-orb-shell {
+    position: relative;
+    min-height: 520px;
+    width: 100%;
+    overflow: visible;
+    border-radius: 2rem;
+    background: radial-gradient(circle at 50% 48%, rgba(231, 239, 227, 0.78), rgba(247, 245, 239, 0) 66%);
+  }
+  .wellness-orb-shell canvas { height: 520px !important; width: 100% !important; }
+  .orb-info-card {
+    width: 190px;
+    border: 1px solid rgba(199, 216, 198, 0.9);
+    border-radius: 1rem;
+    background: rgba(248, 246, 239, 0.94);
+    padding: 0.8rem 1rem;
+    box-shadow: 0 16px 38px rgba(23, 63, 57, 0.14);
+    color: #173f39;
+    white-space: normal;
+  }
+  .orb-info-card span {
+    display: block;
+    color: #c9784e;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .orb-info-card strong {
+    display: block;
+    margin-top: 0.3rem;
+    font-family: Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.25;
+  }
+  @media (max-width: 640px) {
+    .wellness-orb-shell { min-height: 370px; margin-top: -1rem; }
+    .wellness-orb-shell canvas { height: 370px !important; }
+    .orb-info-card { width: 160px; transform: scale(0.9); transform-origin: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wellness-orb-shell canvas { opacity: 1; }
+  }
 }

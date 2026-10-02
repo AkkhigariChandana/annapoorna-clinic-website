@@ -1,6 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Float, Html, OrbitControls } from '@react-three/drei'
+import * as THREE from 'three'
 import { ArrowLeft, ArrowRight, CalendarDays, Check, Clock3, HeartPulse, Leaf, MapPin, Menu, MessageCircle, Phone, Sparkles, X } from 'lucide-react'
 
 const treatments = [
@@ -13,6 +16,60 @@ const treatments = [
 ]
 
 const nav = ['About', 'Treatments', 'Our Doctor', 'Contact']
+
+function WellnessOrbScene() {
+  const group = useRef<THREE.Group>(null)
+  const rings = useRef<THREE.Group>(null)
+  const [reducedMotion, setReducedMotion] = useState(false)
+
+  useEffect(() => {
+    setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  }, [])
+
+  useFrame((state, delta) => {
+    if (!group.current || reducedMotion) return
+    group.current.rotation.y += delta * 0.035
+    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, state.pointer.y * 0.045, 0.04)
+    group.current.rotation.z = THREE.MathUtils.lerp(group.current.rotation.z, -state.pointer.x * 0.035, 0.04)
+    if (rings.current) rings.current.rotation.z -= delta * 0.012
+  })
+
+  return (
+    <>
+        <ambientLight intensity={1.8} />
+        <directionalLight position={[3, 4, 5]} intensity={2.4} color="#fff5dc" />
+        <pointLight position={[-3, -2, 3]} intensity={2} color="#c9784e" />
+        <group ref={rings}>
+          <mesh rotation={[0.45, 0.15, 0]}><torusGeometry args={[1.72, 0.012, 10, 96]} /><meshBasicMaterial color="#9bb7a2" transparent opacity={0.7} /></mesh>
+          <mesh rotation={[-0.35, 0.45, 0.7]}><torusGeometry args={[1.98, 0.009, 10, 96]} /><meshBasicMaterial color="#e0b18e" transparent opacity={0.6} /></mesh>
+          <mesh rotation={[0.7, -0.4, 0.25]}><torusGeometry args={[2.2, 0.006, 10, 96]} /><meshBasicMaterial color="#d8e5d3" transparent opacity={0.85} /></mesh>
+        </group>
+        <group ref={group}>
+          <mesh>
+            <icosahedronGeometry args={[1.42, 4]} />
+            <meshPhysicalMaterial color="#e8efe1" roughness={0.42} metalness={0.03} transmission={0.08} thickness={0.7} clearcoat={0.35} />
+          </mesh>
+          <mesh scale={0.82}>
+            <icosahedronGeometry args={[1.42, 2]} />
+            <meshBasicMaterial color="#7f9f89" wireframe transparent opacity={0.1} />
+          </mesh>
+          <Float speed={0.7} rotationIntensity={0.2} floatIntensity={0.22}>
+            <mesh position={[-1.35, 0.9, 0.45]} rotation={[0.2, 0.2, -0.55]} scale={[0.12, 0.5, 0.025]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#6f8f86" roughness={0.8} /></mesh>
+            <mesh position={[1.35, -0.8, 0.35]} rotation={[-0.25, -0.25, 0.55]} scale={[0.11, 0.42, 0.025]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c9784e" roughness={0.8} /></mesh>
+            <mesh position={[0.95, 1.15, -0.25]} rotation={[0.1, 0.3, 0.8]} scale={[0.08, 0.3, 0.02]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#9bb7a2" roughness={0.8} /></mesh>
+          </Float>
+          <Html position={[0.85, -1.35, 0.6]} center distanceFactor={5}>
+            <div className="orb-info-card"><span>Rooted in nature</span><strong>Simple care, thoughtfully chosen.</strong></div>
+          </Html>
+        </group>
+        <OrbitControls enableZoom={false} enablePan={false} enableRotate={!reducedMotion} rotateSpeed={0.22} />
+    </>
+  )
+}
+
+function WellnessOrb() {
+  return <div className="wellness-orb-shell" aria-hidden="true"><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 6], fov: 36 }} gl={{ antialias: true, alpha: true }}><WellnessOrbScene /></Canvas></div>
+}
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {
   const [count, setCount] = useState(0)
@@ -109,7 +166,7 @@ export default function Page() {
       <section id="home" className="relative overflow-hidden border-b border-[#e0e7dc]">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 lg:grid-cols-[.9fr_1.1fr] lg:px-8 lg:py-20">
           <div className="relative z-10" style={{ fontFamily: "inherit" }}><div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#cbdcc8] bg-white/70 px-3.5 py-2 text-[11px] font-bold uppercase tracking-[.16em] text-[#317363]"><span className="grid size-5 place-items-center rounded-full bg-[#dce9d9]"><Leaf size={12} /></span> Care that starts with listening</div><h1 className="max-w-xl font-serif text-5xl leading-[.98] tracking-[-.04em] text-[#173f39] sm:text-7xl">Feel better, naturally.</h1><p className="mt-7 max-w-lg text-base leading-7 text-[#617a72]">A warm, neighborhood clinic where Ayurveda and Homoeopathy meet thoughtful conversations, practical guidance, and care designed around you.</p><div className="mt-9 flex flex-wrap gap-3"><button onClick={() => scrollTo('booking')} className="group flex items-center gap-3 rounded-full bg-[#317363] px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-[#317363]/20 transition hover:-translate-y-1">Book an Appointment <ArrowRight size={17} className="transition group-hover:translate-x-1" /></button><button onClick={() => setQueue(true)} className="rounded-full border border-[#b8cdbb] bg-white/60 px-6 py-3.5 text-sm font-bold text-[#317363] transition hover:bg-white">Check Queue</button></div><div data-statistics className="mt-12 grid max-w-lg grid-cols-2 gap-3 sm:grid-cols-3"><div className="rounded-2xl border border-[#dce7d8] bg-white/70 p-3"><strong className="block font-serif text-3xl font-bold tracking-tight text-[#173f39]"><AnimatedStat value={15} suffix="+" /></strong><span className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#617a72]">Years of care</span></div><div className="rounded-2xl border border-[#dce7d8] bg-white/70 p-3"><strong className="block font-serif text-3xl font-bold tracking-tight text-[#173f39]"><AnimatedStat value={50} suffix="+" /></strong><span className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#617a72]">Treatment areas</span></div><div className="rounded-2xl border border-[#dce7d8] bg-white/70 p-3"><strong className="block font-serif text-3xl font-bold tracking-tight text-[#173f39]">1:1</strong><span className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#617a72]">Personalized care</span></div></div></div>
-          <div className="relative"><div className="absolute -right-8 -top-8 size-32 rounded-full border border-[#c9d9bd]" /><div className="absolute -bottom-8 -left-8 size-24 rounded-full bg-[#e4ecd9]" /><div className="relative overflow-hidden rounded-[2rem] rounded-tl-[7rem] shadow-2xl shadow-[#173f39]/15"><img src="/images/annapoorna-clinic-care.png" alt="Doctor speaking with a patient in a calm clinic setting" width="900" height="1120" fetchPriority="high" loading="eager" decoding="async" className="hero-image h-[390px] w-full object-cover sm:h-[470px] lg:h-[520px]" /><div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-2xl bg-[#f7f5ef]/90 p-4 backdrop-blur"><div><p className="text-xs font-bold uppercase tracking-widest text-[#c47752]">Visit us</p><p className="mt-1 text-sm font-semibold">B.N Reddy Nagar, Hyderabad</p></div><MapPin size={20} className="text-[#c47752]" /></div></div></div>
+          <WellnessOrb />
         </div>
       </section>
 

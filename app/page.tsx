@@ -67,12 +67,6 @@ function WellnessOrbScene() {
               <mesh position={[0.01, 0, 0.04]} rotation={[0, 0, Math.PI / 2]} scale={[0.014, 0.22, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh>
             </group>
           </Float>
-          <Html position={[0, 1.15, 1.15]} center distanceFactor={5} zIndexRange={[100, 0]}>
-            <div className="doctor-orb-figure" aria-label="Ayurvedic doctor standing on the wellness orb">
-              <img src="/images/doctor-standing.png" alt="Ayurvedic doctor standing above the wellness orb" />
-              <span>Care that listens first</span>
-            </div>
-          </Html>
           <Html position={[0.85, -1.35, 0.6]} center distanceFactor={5}>
             <div className="orb-info-card"><span>Rooted in nature</span><strong>Simple care, thoughtfully chosen.</strong></div>
           </Html>
@@ -83,7 +77,7 @@ function WellnessOrbScene() {
 }
 
 function WellnessOrb() {
-  return <div className="wellness-orb-shell" aria-hidden="true"><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 6], fov: 36 }} gl={{ antialias: true, alpha: true }}><WellnessOrbScene /></Canvas><div className="wellness-globe-fallback"><span className="globe-leaf globe-leaf-one" /><span className="globe-leaf globe-leaf-two" /><span className="globe-leaf globe-leaf-three" /></div><div className="doctor-orb-fallback"><img src="/images/doctor-standing.png" alt="Ayurvedic doctor standing on the wellness orb" /><span>Care that listens first</span></div></div>
+  return <div className="wellness-orb-shell" aria-hidden="true"><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 6], fov: 36 }} gl={{ antialias: true, alpha: true }}><WellnessOrbScene /></Canvas><div className="wellness-globe-fallback"><span className="globe-leaf globe-leaf-one" /><span className="globe-leaf globe-leaf-two" /><span className="globe-leaf globe-leaf-three" /></div></div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

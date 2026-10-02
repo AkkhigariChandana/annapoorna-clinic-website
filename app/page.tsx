@@ -18,7 +18,7 @@ const treatments = [
 const nav = ['About', 'Treatments', 'Our Doctor', 'Contact']
 
 function DoctorKid() {
-  return <group position={[0, 0.35, 1.45]} scale={0.5}>
+  return <group position={[0, 0.34, 1.45]} scale={0.5}>
     <mesh position={[0, 0.96, 0]}><sphereGeometry args={[0.34, 24, 16]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
     <mesh position={[0, 1.16, -0.05]} scale={[1.05, 0.6, 0.9]}><sphereGeometry args={[0.35, 24, 16]} /><meshStandardMaterial color="#263b35" roughness={0.9} /></mesh>
     <mesh position={[0, 0.42, 0]} scale={[0.62, 0.72, 0.36]}><boxGeometry args={[1, 1, 1]} /><meshStandardMaterial color="#ffffff" roughness={0.6} /></mesh>
@@ -43,9 +43,9 @@ function GlobeScene() {
     <ambientLight intensity={1.6} />
     <directionalLight position={[3, 4, 5]} intensity={2.4} color="#fff6df" />
     <pointLight position={[-3, -2, 3]} intensity={2} color="#86bf91" />
-    <group ref={globe}>
-      <mesh><sphereGeometry args={[1.48, 64, 64]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
-      <mesh scale={1.01}><sphereGeometry args={[1.48, 32, 32]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
+    <group ref={globe} position={[0, -0.62, 0]}>
+      <mesh scale={[1, 0.68, 1]}><sphereGeometry args={[1.48, 64, 64]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
+      <mesh scale={[1.01, 0.69, 1.01]}><sphereGeometry args={[1.48, 32, 32]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
       <mesh rotation={[0.2, 0.5, 0]}><torusGeometry args={[1.78, 0.012, 8, 96]} /><meshBasicMaterial color="#bfd7bb" transparent opacity={0.8} /></mesh>
       <mesh rotation={[-0.4, 0.2, 0.8]}><torusGeometry args={[1.98, 0.009, 8, 96]} /><meshBasicMaterial color="#e0b18e" transparent opacity={0.7} /></mesh>
       <DoctorKid />

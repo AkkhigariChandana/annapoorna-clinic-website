@@ -304,6 +304,7 @@
   .wellness-orb-shell {
     position: relative;
     display: grid;
+    overflow: hidden;
     place-items: center;
     min-height: 520px;
     width: 100%;

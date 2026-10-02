@@ -49,7 +49,7 @@ function DoctorKid() {
     if (leftLeg.current) leftLeg.current.position.y = lift
     if (rightLeg.current) rightLeg.current.position.y = -lift
   })
-  return <group position={[0, 1.23, 0.72]} scale={0.34}>
+  return <group position={[0, 1.23, 0.72]} scale={0.28}>
     <mesh position={[0, 0.98, 0]}><sphereGeometry args={[0.34, 28, 20]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
     <mesh position={[0, 1.18, -0.05]} scale={[1.06, 0.58, 0.92]}><sphereGeometry args={[0.35, 28, 20]} /><meshStandardMaterial color="#263b35" roughness={0.9} /></mesh>
     <mesh position={[0, 0.42, 0]} scale={[0.6, 0.7, 0.34]}><capsuleGeometry args={[0.5, 0.7, 12, 20]} /><meshStandardMaterial color="#ffffff" roughness={0.55} /></mesh>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, Html, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { ArrowLeft, ArrowRight, CalendarDays, Check, Clock3, HeartPulse, Leaf, MapPin, Menu, MessageCircle, Phone, Sparkles, X } from 'lucide-react'
@@ -19,7 +19,6 @@ const nav = ['About', 'Treatments', 'Our Doctor', 'Contact']
 
 function WellnessOrbScene() {
   const group = useRef<THREE.Group>(null)
-  const doctorTexture = useLoader(THREE.TextureLoader, '/images/doctor-standing.png')
   const rings = useRef<THREE.Group>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
 
@@ -58,9 +57,20 @@ function WellnessOrbScene() {
             <circleGeometry args={[0.42, 32]} />
             <meshBasicMaterial color="#173f39" transparent opacity={0.22} depthWrite={false} />
           </mesh>
-          <sprite position={[0, 2.12, 0]} scale={[1.18, 1.72, 1]}>
-            <spriteMaterial map={doctorTexture} transparent alphaTest={0.08} depthWrite={false} color="#ffffff" />
-          </sprite>
+          <group position={[0, 1.48, 0]} scale={0.72}>
+            <mesh position={[0, 0.92, 0]}><sphereGeometry args={[0.32, 24, 16]} /><meshStandardMaterial color="#f0bf91" roughness={0.8} /></mesh>
+            <mesh position={[0, 1.12, -0.03]} scale={[1, 0.55, 0.82]}><sphereGeometry args={[0.34, 24, 16]} /><meshStandardMaterial color="#2e3b32" roughness={0.9} /></mesh>
+            <mesh position={[0, 0.42, 0]} scale={[0.58, 0.72, 0.34]}><boxGeometry args={[1, 1, 1]} /><meshStandardMaterial color="#f8faf4" roughness={0.65} /></mesh>
+            <mesh position={[0, 0.43, 0.19]} scale={[0.24, 0.54, 0.025]}><boxGeometry args={[1, 1, 1]} /><meshStandardMaterial color="#2f806b" roughness={0.55} /></mesh>
+            <mesh position={[-0.24, 0.4, 0]} rotation={[0, 0, -0.32]} scale={[0.14, 0.58, 0.14]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#f8faf4" roughness={0.65} /></mesh>
+            <mesh position={[0.24, 0.4, 0]} rotation={[0, 0, 0.32]} scale={[0.14, 0.58, 0.14]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#f8faf4" roughness={0.65} /></mesh>
+            <mesh position={[-0.15, -0.16, 0]} scale={[0.16, 0.48, 0.16]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#2f806b" roughness={0.6} /></mesh>
+            <mesh position={[0.15, -0.16, 0]} scale={[0.16, 0.48, 0.16]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#2f806b" roughness={0.6} /></mesh>
+            <mesh position={[-0.15, -0.45, 0.03]} scale={[0.2, 0.1, 0.3]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#ffffff" roughness={0.5} /></mesh>
+            <mesh position={[0.15, -0.45, 0.03]} scale={[0.2, 0.1, 0.3]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#ffffff" roughness={0.5} /></mesh>
+            <mesh position={[0, 0.58, 0.34]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.16, 0.018, 8, 32, Math.PI * 1.7]} /><meshBasicMaterial color="#c47752" /></mesh>
+            <mesh position={[0, 0.48, 0.34]}><sphereGeometry args={[0.055, 12, 8]} /><meshStandardMaterial color="#c47752" metalness={0.4} /></mesh>
+          </group>
           <Float speed={0.7} rotationIntensity={0.2} floatIntensity={0.22}>
             <group position={[-1.48, 0.82, 0.5]} rotation={[0.15, 0.2, -0.55]}>
               <mesh scale={[0.16, 0.46, 0.035]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" roughness={0.72} /></mesh>
@@ -74,6 +84,8 @@ function WellnessOrbScene() {
               <mesh scale={[0.11, 0.3, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#d0e5bb" roughness={0.72} /></mesh>
               <mesh position={[0.01, 0, 0.04]} rotation={[0, 0, Math.PI / 2]} scale={[0.014, 0.22, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh>
             </group>
+            <group position={[-0.7, 1.35, 0.2]} rotation={[0.1, 0.2, -0.3]}><mesh scale={[0.06, 0.45, 0.02]}><cylinderGeometry args={[1, 0.7, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh><mesh position={[-0.12, 0.2, 0]} rotation={[0, 0, -0.7]} scale={[0.08, 0.2, 0.03]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh><mesh position={[0.12, 0.04, 0]} rotation={[0, 0, 0.7]} scale={[0.08, 0.2, 0.03]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#a8c99a" /></mesh></group>
+            <group position={[0.7, 0.72, 0.1]} rotation={[0.2, -0.2, 0.4]}><mesh scale={[0.05, 0.38, 0.02]}><cylinderGeometry args={[1, 0.7, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh><mesh position={[-0.1, 0.14, 0]} rotation={[0, 0, -0.6]} scale={[0.07, 0.18, 0.03]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#d0e5bb" /></mesh><mesh position={[0.1, -0.02, 0]} rotation={[0, 0, 0.6]} scale={[0.07, 0.18, 0.03]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh></group>
           </Float>
           <Html position={[0.85, -1.35, 0.6]} center distanceFactor={5}>
             <div className="orb-info-card"><span>Rooted in nature</span><strong>Simple care, thoughtfully chosen.</strong></div>

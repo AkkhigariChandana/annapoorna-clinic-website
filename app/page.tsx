@@ -55,7 +55,7 @@ function GlobeScene() {
     <ambientLight intensity={1.6} />
     <directionalLight position={[3, 4, 5]} intensity={2.4} color="#fff6df" />
     <pointLight position={[-3, -2, 3]} intensity={2} color="#86bf91" />
-    <group ref={globe} position={[0, -0.24, 0]} scale={0.62}>
+    <group ref={globe} position={[0, -0.2, 0]} scale={0.78}>
       <mesh><sphereGeometry args={[1.48, 64, 64]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
       <mesh scale={[1.01, 1.01, 1.01]}><sphereGeometry args={[1.48, 32, 32]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
       <DoctorKid />

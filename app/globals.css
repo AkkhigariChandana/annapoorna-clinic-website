@@ -229,7 +229,11 @@
     to { transform: translateX(-50%); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .marquee-track { animation: none; }
+    html { scroll-behavior: auto; }
+    .marquee-track,
+    .scroll-orb,
+    .hero-image { animation: none; transition: none; }
+    [data-reveal] { opacity: 1; transform: none; filter: none; transition: none; }
   }
   .text-balance {
     text-wrap: balance;

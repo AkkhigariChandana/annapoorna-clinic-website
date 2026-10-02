@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Annapoorna Clinic | Ayurveda & Homoeopathy in Hyderabad',
+  description: 'Personalized Ayurveda and Homoeopathy care rooted in compassion, clarity, and practical wellness guidance in B.N. Reddy Nagar, Hyderabad.',
   generator: 'v0.app',
   icons: {
     icon: [

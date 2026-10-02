@@ -15,7 +15,7 @@ const treatments = [
 const nav = ['About', 'Treatments', 'Our Doctor', 'Contact']
 
 function WellnessOrb() {
-  return <div className="wellness-orb-shell supplied-orbit-hero" aria-hidden="true"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Bdp0Osd6uwvo2eqq4q4hUX4WFhqD3q.png" alt="" className="supplied-orbit-image" /></div>
+  return <div className="wellness-orb-shell supplied-orbit-hero" data-orbit-image="true" aria-hidden="true"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Bdp0Osd6uwvo2eqq4q4hUX4WFhqD3q.png" alt="" className="supplied-orbit-image" /></div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

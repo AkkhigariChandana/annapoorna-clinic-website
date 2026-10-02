@@ -1,6 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import * as THREE from 'three'
 import { ArrowLeft, ArrowRight, CalendarDays, Check, Clock3, HeartPulse, Leaf, MapPin, Menu, MessageCircle, Phone, Sparkles, X } from 'lucide-react'
 
 const treatments = [
@@ -14,8 +17,47 @@ const treatments = [
 
 const nav = ['About', 'Treatments', 'Our Doctor', 'Contact']
 
+function DoctorKid() {
+  return <group position={[0, 0.35, 1.45]} scale={0.5}>
+    <mesh position={[0, 0.96, 0]}><sphereGeometry args={[0.34, 24, 16]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
+    <mesh position={[0, 1.16, -0.05]} scale={[1.05, 0.6, 0.9]}><sphereGeometry args={[0.35, 24, 16]} /><meshStandardMaterial color="#263b35" roughness={0.9} /></mesh>
+    <mesh position={[0, 0.42, 0]} scale={[0.62, 0.72, 0.36]}><boxGeometry args={[1, 1, 1]} /><meshStandardMaterial color="#ffffff" roughness={0.6} /></mesh>
+    <mesh position={[0, 0.45, 0.19]} scale={[0.22, 0.55, 0.03]}><boxGeometry args={[1, 1, 1]} /><meshStandardMaterial color="#2d826d" roughness={0.55} /></mesh>
+    <mesh position={[-0.27, 0.4, 0]} rotation={[0, 0, -0.3]} scale={[0.15, 0.58, 0.15]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#ffffff" /></mesh>
+    <mesh position={[0.27, 0.4, 0]} rotation={[0, 0, 0.3]} scale={[0.15, 0.58, 0.15]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#ffffff" /></mesh>
+    <mesh position={[-0.16, -0.18, 0]} scale={[0.17, 0.5, 0.17]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#2d826d" /></mesh>
+    <mesh position={[0.16, -0.18, 0]} scale={[0.17, 0.5, 0.17]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#2d826d" /></mesh>
+    <mesh position={[-0.16, -0.48, 0.05]} scale={[0.22, 0.1, 0.32]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#ffffff" /></mesh>
+    <mesh position={[0.16, -0.48, 0.05]} scale={[0.22, 0.1, 0.32]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#ffffff" /></mesh>
+    <mesh position={[0, 0.6, 0.35]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.17, 0.018, 8, 32, Math.PI * 1.7]} /><meshBasicMaterial color="#c47752" /></mesh>
+    <mesh position={[0, 0.49, 0.35]}><sphereGeometry args={[0.055, 12, 8]} /><meshStandardMaterial color="#c47752" metalness={0.5} /></mesh>
+  </group>
+}
+
+function GlobeScene() {
+  const globe = useRef<THREE.Group>(null)
+  const reducedMotion = useRef(false)
+  useEffect(() => { reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches }, [])
+  useFrame((_, delta) => { if (globe.current && !reducedMotion.current) globe.current.rotation.y += delta * 0.16 })
+  return <>
+    <ambientLight intensity={1.6} />
+    <directionalLight position={[3, 4, 5]} intensity={2.4} color="#fff6df" />
+    <pointLight position={[-3, -2, 3]} intensity={2} color="#86bf91" />
+    <group ref={globe}>
+      <mesh><sphereGeometry args={[1.48, 64, 64]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
+      <mesh scale={1.01}><sphereGeometry args={[1.48, 32, 32]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
+      <mesh rotation={[0.2, 0.5, 0]}><torusGeometry args={[1.78, 0.012, 8, 96]} /><meshBasicMaterial color="#bfd7bb" transparent opacity={0.8} /></mesh>
+      <mesh rotation={[-0.4, 0.2, 0.8]}><torusGeometry args={[1.98, 0.009, 8, 96]} /><meshBasicMaterial color="#e0b18e" transparent opacity={0.7} /></mesh>
+      <DoctorKid />
+      <group position={[-1.45, 0.35, 0.25]} rotation={[0.1, 0.3, -0.55]}><mesh scale={[0.16, 0.48, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c7dfa9" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, 0.2]} scale={[0.02, 0.38, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
+      <group position={[1.38, -0.38, 0.25]} rotation={[-0.2, -0.25, 0.55]}><mesh scale={[0.14, 0.42, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, -0.2]} scale={[0.02, 0.34, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
+    </group>
+    <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.35} enableDamping dampingFactor={0.08} />
+  </>
+}
+
 function WellnessOrb() {
-  return <div className="wellness-orb-shell supplied-orbit-hero" data-orbit-image="true" aria-hidden="true"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Bdp0Osd6uwvo2eqq4q4hUX4WFhqD3q.png" alt="" className="supplied-orbit-image" /></div>
+  return <div className="wellness-orb-shell" aria-label="Rotating green wellness globe with a child doctor and medicinal leaves"><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5.4], fov: 35 }} gl={{ antialias: true, alpha: true }}><GlobeScene /></Canvas></div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

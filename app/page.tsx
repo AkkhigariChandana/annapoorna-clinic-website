@@ -49,7 +49,7 @@ function DoctorKid() {
     if (leftLeg.current) leftLeg.current.position.y = lift
     if (rightLeg.current) rightLeg.current.position.y = -lift
   })
-  return <group position={[0, 1.58, 0.82]} scale={0.34}>
+  return <group position={[0, 1.23, 0.72]} scale={0.34}>
     <mesh position={[0, 0.98, 0]}><sphereGeometry args={[0.34, 28, 20]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
     <mesh position={[0, 1.18, -0.05]} scale={[1.06, 0.58, 0.92]}><sphereGeometry args={[0.35, 28, 20]} /><meshStandardMaterial color="#263b35" roughness={0.9} /></mesh>
     <mesh position={[0, 0.42, 0]} scale={[0.6, 0.7, 0.34]}><capsuleGeometry args={[0.5, 0.7, 12, 20]} /><meshStandardMaterial color="#ffffff" roughness={0.55} /></mesh>
@@ -72,14 +72,14 @@ function GlobeScene() {
     <ambientLight intensity={1.6} />
     <directionalLight position={[3, 4, 5]} intensity={2.4} color="#fff6df" />
     <pointLight position={[-3, -2, 3]} intensity={2} color="#86bf91" />
-    <group ref={globe} position={[0, -0.16, 0]} scale={0.88}>
+    <group ref={globe} position={[0, -0.16, 0]} scale={0.78}>
       <mesh><sphereGeometry args={[1.48, 64, 64]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
       <mesh scale={[1.01, 1.01, 1.01]}><sphereGeometry args={[1.48, 32, 32]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
-      <DoctorKid />
       <FallingLeaves />
       <group position={[-1.45, 0.25, 0.25]} rotation={[0.1, 0.3, -0.55]}><mesh scale={[0.16, 0.48, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c7dfa9" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, 0.2]} scale={[0.02, 0.38, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
       <group position={[1.38, -0.38, 0.25]} rotation={[-0.2, -0.25, 0.55]}><mesh scale={[0.14, 0.42, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, -0.2]} scale={[0.02, 0.34, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
     </group>
+    <DoctorKid />
     <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.35} enableDamping dampingFactor={0.08} />
   </>
 }

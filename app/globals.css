@@ -310,8 +310,43 @@
     background: radial-gradient(circle at 50% 48%, rgba(231, 239, 227, 0.78), rgba(247, 245, 239, 0) 66%);
   }
   .wellness-orb-shell canvas { height: 520px !important; width: 100% !important; }
+  .wellness-globe-fallback {
+  position: absolute;
+  left: 50%;
+  top: 24%;
+  width: 280px;
+  height: 280px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #b8d9a8 0 6%, #6ca27f 38%, #35765f 78%, #245945 100%);
+  box-shadow: inset -24px -18px 38px rgba(18, 63, 47, 0.28), 0 24px 50px rgba(44, 91, 71, 0.2);
+  opacity: 0.92;
+  z-index: 1;
+}
+  .wellness-globe-fallback::before,
+  .wellness-globe-fallback::after {
+  content: "";
+  position: absolute;
+  inset: 12% 8%;
+  border: 1px solid rgba(213, 239, 198, 0.34);
+  border-radius: 50%;
+  transform: rotate(-28deg) scaleX(0.38);
+}
+  .wellness-globe-fallback::after { transform: rotate(28deg) scaleX(0.38); }
+  .globe-leaf {
+  position: absolute;
+  width: 28px;
+  height: 58px;
+  border-radius: 100% 0 100% 0;
+  background: #d5e9c7;
+  box-shadow: inset 5px -4px 0 rgba(55, 119, 87, 0.32);
+}
+  .globe-leaf::after { content: ""; position: absolute; left: 50%; top: 8px; width: 2px; height: 42px; background: #4d8967; transform: rotate(28deg); }
+  .globe-leaf-one { left: -26px; top: 66px; transform: rotate(-42deg); }
+  .globe-leaf-two { right: -24px; top: 112px; transform: rotate(48deg) scale(0.82); }
+  .globe-leaf-three { left: 42px; bottom: -24px; transform: rotate(-12deg) scale(0.68); }
   .doctor-orb-fallback {
-    position: absolute;
+  position: absolute;
     left: 50%;
     top: 7%;
     z-index: 4;

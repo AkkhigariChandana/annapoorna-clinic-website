@@ -47,16 +47,25 @@ function WellnessOrbScene() {
         <group ref={group}>
           <mesh>
             <icosahedronGeometry args={[1.42, 4]} />
-            <meshPhysicalMaterial color="#e8efe1" roughness={0.42} metalness={0.03} transmission={0.08} thickness={0.7} clearcoat={0.35} />
+            <meshPhysicalMaterial color="#5f967b" roughness={0.34} metalness={0.02} transmission={0.04} thickness={0.7} clearcoat={0.42} />
           </mesh>
           <mesh scale={0.82}>
             <icosahedronGeometry args={[1.42, 2]} />
             <meshBasicMaterial color="#7f9f89" wireframe transparent opacity={0.1} />
           </mesh>
           <Float speed={0.7} rotationIntensity={0.2} floatIntensity={0.22}>
-            <mesh position={[-1.35, 0.9, 0.45]} rotation={[0.2, 0.2, -0.55]} scale={[0.12, 0.5, 0.025]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#6f8f86" roughness={0.8} /></mesh>
-            <mesh position={[1.35, -0.8, 0.35]} rotation={[-0.25, -0.25, 0.55]} scale={[0.11, 0.42, 0.025]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c9784e" roughness={0.8} /></mesh>
-            <mesh position={[0.95, 1.15, -0.25]} rotation={[0.1, 0.3, 0.8]} scale={[0.08, 0.3, 0.02]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#9bb7a2" roughness={0.8} /></mesh>
+            <group position={[-1.48, 0.82, 0.5]} rotation={[0.15, 0.2, -0.55]}>
+              <mesh scale={[0.16, 0.46, 0.035]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" roughness={0.72} /></mesh>
+              <mesh position={[0.01, 0, 0.04]} rotation={[0, 0, Math.PI / 2]} scale={[0.018, 0.34, 0.012]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#3d795f" /></mesh>
+            </group>
+            <group position={[1.48, -0.72, 0.4]} rotation={[-0.2, -0.25, 0.55]}>
+              <mesh scale={[0.14, 0.42, 0.035]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#a8c99a" roughness={0.72} /></mesh>
+              <mesh position={[0.01, 0, 0.04]} rotation={[0, 0, Math.PI / 2]} scale={[0.016, 0.3, 0.012]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#3d795f" /></mesh>
+            </group>
+            <group position={[0.95, 1.18, -0.25]} rotation={[0.1, 0.3, 0.8]}>
+              <mesh scale={[0.11, 0.3, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#d0e5bb" roughness={0.72} /></mesh>
+              <mesh position={[0.01, 0, 0.04]} rotation={[0, 0, Math.PI / 2]} scale={[0.014, 0.22, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh>
+            </group>
           </Float>
           <Html position={[0, 1.15, 1.15]} center distanceFactor={5} zIndexRange={[100, 0]}>
             <div className="doctor-orb-figure" aria-label="Ayurvedic doctor standing on the wellness orb">
@@ -74,7 +83,7 @@ function WellnessOrbScene() {
 }
 
 function WellnessOrb() {
-  return <div className="wellness-orb-shell" aria-hidden="true"><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 6], fov: 36 }} gl={{ antialias: true, alpha: true }}><WellnessOrbScene /></Canvas><div className="doctor-orb-fallback"><img src="/images/doctor-standing.png" alt="Ayurvedic doctor standing on the wellness orb" /><span>Care that listens first</span></div></div>
+  return <div className="wellness-orb-shell" aria-hidden="true"><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 6], fov: 36 }} gl={{ antialias: true, alpha: true }}><WellnessOrbScene /></Canvas><div className="wellness-globe-fallback"><span className="globe-leaf globe-leaf-one" /><span className="globe-leaf globe-leaf-two" /><span className="globe-leaf globe-leaf-three" /></div><div className="doctor-orb-fallback"><img src="/images/doctor-standing.png" alt="Ayurvedic doctor standing on the wellness orb" /><span>Care that listens first</span></div></div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

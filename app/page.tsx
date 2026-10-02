@@ -82,7 +82,7 @@ function GlobeScene() {
 }
 
 function WellnessOrb() {
-  return <div className="wellness-orb-shell supplied-orbit-hero" aria-label="Wellness globe with child doctor and medicinal leaves"><img className="supplied-orbit-image" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-rPbpoMZO2NTee1CFeAqlp2In3nocDO.png" alt="Child doctor standing on a green wellness globe with medicinal leaves" /></div>
+  return <div className="wellness-orb-shell supplied-orbit-hero" aria-label="Doctor talking with a patient in the Annapoorna clinic"><img className="supplied-orbit-image" src="/images/annapoorna-clinic-care.png" alt="Doctor talking with a patient in a warm Annapoorna clinic room" /></div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

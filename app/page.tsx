@@ -39,20 +39,10 @@ function DoctorKid() {
   const rightArm = useRef<THREE.Group>(null)
   const leftLeg = useRef<THREE.Group>(null)
   const rightLeg = useRef<THREE.Group>(null)
-  useFrame(({ clock }) => {
-    const stride = Math.sin(clock.getElapsedTime() * 5.2) * 0.52
-    const lift = Math.max(0, Math.sin(clock.getElapsedTime() * 5.2)) * 0.035
-    if (leftArm.current) leftArm.current.rotation.z = -0.18 + stride
-    if (rightArm.current) rightArm.current.rotation.z = 0.18 - stride
-    if (leftLeg.current) leftLeg.current.rotation.z = stride * 0.8
-    if (rightLeg.current) rightLeg.current.rotation.z = -stride * 0.8
-    if (leftLeg.current) leftLeg.current.position.y = lift
-    if (rightLeg.current) rightLeg.current.position.y = -lift
-  })
-  return <group position={[0, 1.23, 0.72]} scale={0.28}>
+  return <group position={[0, 1.92, 0.18]} scale={0.28}>
     <mesh position={[0, 0.98, 0]}><sphereGeometry args={[0.34, 28, 20]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
-    <mesh position={[0, 1.18, -0.05]} scale={[1.06, 0.58, 0.92]}><sphereGeometry args={[0.35, 28, 20]} /><meshStandardMaterial color="#263b35" roughness={0.9} /></mesh>
-    <mesh position={[0, 0.42, 0]} scale={[0.6, 0.7, 0.34]}><capsuleGeometry args={[0.5, 0.7, 12, 20]} /><meshStandardMaterial color="#ffffff" roughness={0.55} /></mesh>
+    <mesh position={[0, 1.18, -0.05]} scale={[1.06, 0.58, 0.92]}><sphereGeometry args={[0.35, 28, 20]} /><meshStandardMaterial color="#2466a4" roughness={0.82} /></mesh>
+    <mesh position={[0, 0.42, 0]} scale={[0.6, 0.7, 0.34]}><capsuleGeometry args={[0.5, 0.7, 12, 20]} /><meshStandardMaterial color="#1e6eae" roughness={0.55} /></mesh>
     <mesh position={[0, 0.45, 0.19]} scale={[0.22, 0.52, 0.03]}><boxGeometry args={[1, 1, 1]} /><meshStandardMaterial color="#2d826d" roughness={0.55} /></mesh>
     <group ref={leftArm} position={[-0.28, 0.46, 0]}><mesh position={[0, -0.24, 0]} scale={[0.14, 0.52, 0.14]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#ffffff" /></mesh><mesh position={[0, -0.53, 0.02]}><sphereGeometry args={[0.12, 16, 12]} /><meshStandardMaterial color="#efbd91" /></mesh></group>
     <group ref={rightArm} position={[0.28, 0.46, 0]}><mesh position={[0, -0.24, 0]} scale={[0.14, 0.52, 0.14]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#ffffff" /></mesh><mesh position={[0, -0.53, 0.02]}><sphereGeometry args={[0.12, 16, 12]} /><meshStandardMaterial color="#efbd91" /></mesh></group>
@@ -75,11 +65,11 @@ function GlobeScene() {
     <group ref={globe} position={[0, -0.16, 0]} scale={0.78}>
       <mesh><sphereGeometry args={[1.48, 64, 64]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
       <mesh scale={[1.01, 1.01, 1.01]}><sphereGeometry args={[1.48, 32, 32]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
+      <DoctorKid />
       <FallingLeaves />
       <group position={[-1.45, 0.25, 0.25]} rotation={[0.1, 0.3, -0.55]}><mesh scale={[0.16, 0.48, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c7dfa9" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, 0.2]} scale={[0.02, 0.38, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
       <group position={[1.38, -0.38, 0.25]} rotation={[-0.2, -0.25, 0.55]}><mesh scale={[0.14, 0.42, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, -0.2]} scale={[0.02, 0.34, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
     </group>
-    <DoctorKid />
     <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.35} enableDamping dampingFactor={0.08} />
   </>
 }

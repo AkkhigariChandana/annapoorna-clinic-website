@@ -310,6 +310,41 @@
     background: radial-gradient(circle at 50% 48%, rgba(231, 239, 227, 0.78), rgba(247, 245, 239, 0) 66%);
   }
   .wellness-orb-shell canvas { height: 520px !important; width: 100% !important; }
+  .doctor-orb-fallback {
+    position: absolute;
+    left: 50%;
+    top: 7%;
+    z-index: 4;
+    display: flex;
+    width: 190px;
+    height: 250px;
+    align-items: flex-end;
+    justify-content: center;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .doctor-orb-fallback img {
+    width: 180px;
+    height: 242px;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: saturate(1.05) contrast(1.08) drop-shadow(0 12px 12px rgba(23, 63, 57, 0.2));
+  }
+  .doctor-orb-fallback span {
+    position: absolute;
+    right: -28px;
+    top: 42px;
+    border: 1px solid rgba(199, 216, 198, 0.9);
+    border-radius: 999px;
+    background: rgba(248, 246, 239, 0.94);
+    padding: 0.45rem 0.7rem;
+    color: #317363;
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 10px 24px rgba(23, 63, 57, 0.12);
+  }
 .doctor-orb-figure {
   position: relative;
   width: 190px;
@@ -331,16 +366,17 @@
   background: rgba(199, 120, 78, 0.28);
   filter: blur(8px);
 }
-.doctor-orb-figure img {
+  .doctor-orb-figure img {
   position: relative;
   z-index: 1;
+  display: block;
   width: 180px;
   height: 242px;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center bottom;
   border-radius: 45% 45% 18% 18%;
-  mix-blend-mode: multiply;
-  filter: saturate(0.9) contrast(1.02);
+  mix-blend-mode: normal;
+  filter: saturate(1.05) contrast(1.08) drop-shadow(0 12px 12px rgba(23, 63, 57, 0.2));
 }
 .doctor-orb-figure span {
   position: absolute;

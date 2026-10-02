@@ -46,6 +46,8 @@ function DoctorKid() {
     <mesh position={[0, 0.98, 0]}><sphereGeometry args={[0.34, 28, 20]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
     <mesh position={[-0.12, 1.02, 0.3]} scale={[0.035, 0.045, 0.018]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#263b35" /></mesh>
     <mesh position={[0.12, 1.02, 0.3]} scale={[0.035, 0.045, 0.018]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#263b35" /></mesh>
+    <mesh position={[0, 0.9, 0.31]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.09, 0.018, 8, 20, Math.PI]} /><meshBasicMaterial color="#9a4f43" /></mesh>
+    <mesh position={[0, 0.89, 0.315]} scale={[0.07, 0.025, 0.012]}><sphereGeometry args={[1, 12, 8]} /><meshBasicMaterial color="#f28f84" /></mesh>
     <mesh position={[0, 1.18, -0.05]} scale={[1.06, 0.58, 0.92]}><sphereGeometry args={[0.35, 28, 20]} /><meshStandardMaterial color="#263b35" roughness={0.82} /></mesh>
     <mesh position={[0, 1.28, 0.03]} scale={[0.4, 0.08, 0.32]}><sphereGeometry args={[1, 20, 12]} /><meshStandardMaterial color="#2466a4" roughness={0.7} /></mesh>
     <mesh position={[0, 0.42, 0]} scale={[0.6, 0.7, 0.34]}><capsuleGeometry args={[0.5, 0.7, 12, 20]} /><meshStandardMaterial color="#ffffff" roughness={0.55} /></mesh>

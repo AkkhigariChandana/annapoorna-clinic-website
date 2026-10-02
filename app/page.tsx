@@ -77,13 +77,12 @@ function GlobeScene() {
       <group position={[-1.45, 0.25, 0.25]} rotation={[0.1, 0.3, -0.55]}><mesh scale={[0.16, 0.48, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c7dfa9" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, 0.2]} scale={[0.02, 0.38, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
       <group position={[1.38, -0.38, 0.25]} rotation={[-0.2, -0.25, 0.55]}><mesh scale={[0.14, 0.42, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, -0.2]} scale={[0.02, 0.34, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
     </group>
-    <DoctorKid />
     <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.35} enableDamping dampingFactor={0.08} />
   </>
 }
 
 function WellnessOrb() {
-  return <div className="wellness-orb-shell" aria-label="Rotating green wellness globe with a child doctor and medicinal leaves"><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5.4], fov: 35 }} gl={{ antialias: true, alpha: true }}><GlobeScene /></Canvas></div>
+  return <div className="wellness-orb-shell" aria-label="Rotating green wellness globe with a child doctor and medicinal leaves"><img className="reference-kid" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-0gK2cyzNcX869NoFnsOm3nMD1EIDWH.png" alt="Child doctor standing on the wellness globe" /><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5.4], fov: 35 }} gl={{ antialias: true, alpha: true }}><GlobeScene /></Canvas></div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

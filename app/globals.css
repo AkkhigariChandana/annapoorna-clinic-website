@@ -157,7 +157,19 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+    background: #f7f5ef;
+  }
   body {
     @apply bg-background text-foreground;
+    background: #f7f5ef;
+    color: #173f39;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: #c47752;
+    color: #ffffff;
   }
 }

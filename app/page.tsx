@@ -35,18 +35,19 @@ function FallingLeaves() {
 }
 
 function DoctorKid() {
+  const leftArm = useRef<THREE.Group>(null)
+  const rightArm = useRef<THREE.Group>(null)
+  const leftLeg = useRef<THREE.Group>(null)
+  const rightLeg = useRef<THREE.Group>(null)
   return <group position={[0, 1.92, 0.18]} scale={0.28}>
     <mesh position={[0, 0.98, 0]}><sphereGeometry args={[0.34, 28, 20]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
-    <mesh position={[-0.12, 1.02, 0.3]} scale={[0.035, 0.045, 0.018]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#263b35" /></mesh>
-    <mesh position={[0.12, 1.02, 0.3]} scale={[0.035, 0.045, 0.018]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#263b35" /></mesh>
-    <mesh position={[0, 1.18, -0.05]} scale={[1.06, 0.58, 0.92]}><sphereGeometry args={[0.35, 28, 20]} /><meshStandardMaterial color="#263b35" roughness={0.82} /></mesh>
-    <mesh position={[0, 1.28, 0.03]} scale={[0.4, 0.08, 0.32]}><sphereGeometry args={[1, 20, 12]} /><meshStandardMaterial color="#2466a4" roughness={0.7} /></mesh>
-    <mesh position={[0, 0.42, 0]} scale={[0.6, 0.7, 0.34]}><capsuleGeometry args={[0.5, 0.7, 12, 20]} /><meshStandardMaterial color="#ffffff" roughness={0.55} /></mesh>
+    <mesh position={[0, 1.18, -0.05]} scale={[1.06, 0.58, 0.92]}><sphereGeometry args={[0.35, 28, 20]} /><meshStandardMaterial color="#2466a4" roughness={0.82} /></mesh>
+    <mesh position={[0, 0.42, 0]} scale={[0.6, 0.7, 0.34]}><capsuleGeometry args={[0.5, 0.7, 12, 20]} /><meshStandardMaterial color="#1e6eae" roughness={0.55} /></mesh>
     <mesh position={[0, 0.45, 0.19]} scale={[0.22, 0.52, 0.03]}><boxGeometry args={[1, 1, 1]} /><meshStandardMaterial color="#2d826d" roughness={0.55} /></mesh>
-    <group position={[-0.28, 0.46, 0]}><mesh position={[0, -0.24, 0]} scale={[0.14, 0.52, 0.14]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#ffffff" /></mesh><mesh position={[0, -0.53, 0.02]}><sphereGeometry args={[0.12, 16, 12]} /><meshStandardMaterial color="#efbd91" /></mesh></group>
-    <group position={[0.28, 0.46, 0]}><mesh position={[0, -0.24, 0]} scale={[0.14, 0.52, 0.14]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#ffffff" /></mesh><mesh position={[0, -0.53, 0.02]}><sphereGeometry args={[0.12, 16, 12]} /><meshStandardMaterial color="#efbd91" /></mesh></group>
-    <group position={[-0.16, 0, 0]}><mesh position={[0, -0.2, 0]} scale={[0.16, 0.5, 0.16]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#2d826d" /></mesh><mesh position={[0, -0.52, 0.08]} scale={[0.2, 0.1, 0.3]}><sphereGeometry args={[1, 16, 10]} /><meshStandardMaterial color="#ffffff" /></mesh></group>
-    <group position={[0.16, 0, 0]}><mesh position={[0, -0.2, 0]} scale={[0.16, 0.5, 0.16]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#2d826d" /></mesh><mesh position={[0, -0.52, 0.08]} scale={[0.2, 0.1, 0.3]}><sphereGeometry args={[1, 16, 10]} /><meshStandardMaterial color="#ffffff" /></mesh></group>
+    <group ref={leftArm} position={[-0.28, 0.46, 0]}><mesh position={[0, -0.24, 0]} scale={[0.14, 0.52, 0.14]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#ffffff" /></mesh><mesh position={[0, -0.53, 0.02]}><sphereGeometry args={[0.12, 16, 12]} /><meshStandardMaterial color="#efbd91" /></mesh></group>
+    <group ref={rightArm} position={[0.28, 0.46, 0]}><mesh position={[0, -0.24, 0]} scale={[0.14, 0.52, 0.14]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#ffffff" /></mesh><mesh position={[0, -0.53, 0.02]}><sphereGeometry args={[0.12, 16, 12]} /><meshStandardMaterial color="#efbd91" /></mesh></group>
+    <group ref={leftLeg} position={[-0.16, 0, 0]}><mesh position={[0, -0.2, 0]} scale={[0.16, 0.5, 0.16]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#2d826d" /></mesh><mesh position={[0, -0.52, 0.08]} scale={[0.2, 0.1, 0.3]}><sphereGeometry args={[1, 16, 10]} /><meshStandardMaterial color="#ffffff" /></mesh></group>
+    <group ref={rightLeg} position={[0.16, 0, 0]}><mesh position={[0, -0.2, 0]} scale={[0.16, 0.5, 0.16]}><capsuleGeometry args={[0.5, 1, 10, 16]} /><meshStandardMaterial color="#2d826d" /></mesh><mesh position={[0, -0.52, 0.08]} scale={[0.2, 0.1, 0.3]}><sphereGeometry args={[1, 16, 10]} /><meshStandardMaterial color="#ffffff" /></mesh></group>
     <mesh position={[0, 0.6, 0.35]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.17, 0.018, 8, 32, Math.PI * 1.7]} /><meshBasicMaterial color="#c47752" /></mesh>
     <mesh position={[0, 0.49, 0.35]}><sphereGeometry args={[0.055, 12, 8]} /><meshStandardMaterial color="#c47752" metalness={0.5} /></mesh>
   </group>

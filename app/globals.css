@@ -194,6 +194,43 @@
   .clinic-card:hover {
     box-shadow: 0 24px 70px rgba(23, 63, 57, 0.14);
   }
+  .benefits-marquee {
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.86);
+  }
+  .marquee-window {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: clinic-marquee 28s linear infinite;
+  }
+  .marquee-item {
+    display: flex;
+    min-width: 280px;
+    align-items: center;
+    gap: 1rem;
+    border-right: 1px solid #e5ebe2;
+    padding: 1.5rem 2.5rem;
+  }
+  .marquee-item small {
+    display: block;
+    margin-top: 0.25rem;
+    white-space: nowrap;
+  }
+  .benefits-marquee:hover .marquee-track,
+  .benefits-marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes clinic-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
   .text-balance {
     text-wrap: balance;
   }

@@ -97,7 +97,7 @@ function WellnessOrbScene() {
 }
 
 function WellnessOrb() {
-  return <div className="wellness-orb-shell" aria-hidden="true"><Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 6], fov: 36 }} gl={{ antialias: true, alpha: true }}><WellnessOrbScene /></Canvas><div className="wellness-globe-fallback"><span className="globe-leaf globe-leaf-one" /><span className="globe-leaf globe-leaf-two" /><span className="globe-leaf globe-leaf-three" /></div></div>
+  return <div className="wellness-orb-shell supplied-orbit-hero" aria-hidden="true"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Bdp0Osd6uwvo2eqq4q4hUX4WFhqD3q.png" alt="" className="supplied-orbit-image" /></div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

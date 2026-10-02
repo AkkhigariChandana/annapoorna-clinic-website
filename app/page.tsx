@@ -35,7 +35,7 @@ function FallingLeaves() {
 }
 
 function DoctorKid() {
-  return <group position={[0, 1.92, 0.18]} scale={0.28}>
+  return <group position={[0, 1.78, 0.18]} scale={0.28}>
     <mesh position={[0, 0.98, 0]}><sphereGeometry args={[0.34, 28, 20]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
     <mesh position={[-0.12, 1.02, 0.3]} scale={[0.035, 0.045, 0.018]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#263b35" /></mesh>
     <mesh position={[0.12, 1.02, 0.3]} scale={[0.035, 0.045, 0.018]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#263b35" /></mesh>

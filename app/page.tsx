@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { Float, Html, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { ArrowLeft, ArrowRight, CalendarDays, Check, Clock3, HeartPulse, Leaf, MapPin, Menu, MessageCircle, Phone, Sparkles, X } from 'lucide-react'
@@ -19,6 +19,7 @@ const nav = ['About', 'Treatments', 'Our Doctor', 'Contact']
 
 function WellnessOrbScene() {
   const group = useRef<THREE.Group>(null)
+  const doctorTexture = useLoader(THREE.TextureLoader, '/images/doctor-standing.png')
   const rings = useRef<THREE.Group>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
 
@@ -53,6 +54,13 @@ function WellnessOrbScene() {
             <icosahedronGeometry args={[1.42, 2]} />
             <meshBasicMaterial color="#7f9f89" wireframe transparent opacity={0.1} />
           </mesh>
+          <mesh position={[0, 1.43, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.72, 0.72, 1]}>
+            <circleGeometry args={[0.42, 32]} />
+            <meshBasicMaterial color="#173f39" transparent opacity={0.22} depthWrite={false} />
+          </mesh>
+          <sprite position={[0, 2.12, 0]} scale={[1.18, 1.72, 1]}>
+            <spriteMaterial map={doctorTexture} transparent alphaTest={0.08} depthWrite={false} color="#ffffff" />
+          </sprite>
           <Float speed={0.7} rotationIntensity={0.2} floatIntensity={0.22}>
             <group position={[-1.48, 0.82, 0.5]} rotation={[0.15, 0.2, -0.55]}>
               <mesh scale={[0.16, 0.46, 0.035]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" roughness={0.72} /></mesh>

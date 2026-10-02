@@ -1,9 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Float, Html, OrbitControls } from '@react-three/drei'
-import * as THREE from 'three'
+import { useEffect, useState } from 'react'
 import { ArrowLeft, ArrowRight, CalendarDays, Check, Clock3, HeartPulse, Leaf, MapPin, Menu, MessageCircle, Phone, Sparkles, X } from 'lucide-react'
 
 const treatments = [
@@ -16,85 +13,6 @@ const treatments = [
 ]
 
 const nav = ['About', 'Treatments', 'Our Doctor', 'Contact']
-
-function WellnessOrbScene() {
-  const group = useRef<THREE.Group>(null)
-  const rings = useRef<THREE.Group>(null)
-  const [reducedMotion, setReducedMotion] = useState(false)
-
-  useEffect(() => {
-    setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-  }, [])
-
-  useFrame((state, delta) => {
-    if (!group.current || reducedMotion) return
-    group.current.rotation.y += delta * 0.035
-    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, state.pointer.y * 0.045, 0.04)
-    group.current.rotation.z = THREE.MathUtils.lerp(group.current.rotation.z, -state.pointer.x * 0.035, 0.04)
-    if (rings.current) rings.current.rotation.z -= delta * 0.012
-  })
-
-  return (
-    <>
-        <ambientLight intensity={1.8} />
-        <directionalLight position={[3, 4, 5]} intensity={2.4} color="#fff5dc" />
-        <pointLight position={[-3, -2, 3]} intensity={2} color="#c9784e" />
-        <group ref={rings}>
-          <mesh rotation={[0.45, 0.15, 0]}><torusGeometry args={[1.72, 0.012, 10, 96]} /><meshBasicMaterial color="#9bb7a2" transparent opacity={0.7} /></mesh>
-          <mesh rotation={[-0.35, 0.45, 0.7]}><torusGeometry args={[1.98, 0.009, 10, 96]} /><meshBasicMaterial color="#e0b18e" transparent opacity={0.6} /></mesh>
-          <mesh rotation={[0.7, -0.4, 0.25]}><torusGeometry args={[2.2, 0.006, 10, 96]} /><meshBasicMaterial color="#d8e5d3" transparent opacity={0.85} /></mesh>
-        </group>
-        <group ref={group}>
-          <mesh>
-            <icosahedronGeometry args={[1.42, 4]} />
-            <meshPhysicalMaterial color="#5f967b" roughness={0.34} metalness={0.02} transmission={0.04} thickness={0.7} clearcoat={0.42} />
-          </mesh>
-          <mesh scale={0.82}>
-            <icosahedronGeometry args={[1.42, 2]} />
-            <meshBasicMaterial color="#7f9f89" wireframe transparent opacity={0.1} />
-          </mesh>
-          <mesh position={[0, 1.43, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.72, 0.72, 1]}>
-            <circleGeometry args={[0.42, 32]} />
-            <meshBasicMaterial color="#173f39" transparent opacity={0.22} depthWrite={false} />
-          </mesh>
-          <group position={[0, 1.48, 0]} scale={0.72}>
-            <mesh position={[0, 0.92, 0]}><sphereGeometry args={[0.32, 24, 16]} /><meshStandardMaterial color="#f0bf91" roughness={0.8} /></mesh>
-            <mesh position={[0, 1.12, -0.03]} scale={[1, 0.55, 0.82]}><sphereGeometry args={[0.34, 24, 16]} /><meshStandardMaterial color="#2e3b32" roughness={0.9} /></mesh>
-            <mesh position={[0, 0.42, 0]} scale={[0.58, 0.72, 0.34]}><boxGeometry args={[1, 1, 1]} /><meshStandardMaterial color="#f8faf4" roughness={0.65} /></mesh>
-            <mesh position={[0, 0.43, 0.19]} scale={[0.24, 0.54, 0.025]}><boxGeometry args={[1, 1, 1]} /><meshStandardMaterial color="#2f806b" roughness={0.55} /></mesh>
-            <mesh position={[-0.24, 0.4, 0]} rotation={[0, 0, -0.32]} scale={[0.14, 0.58, 0.14]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#f8faf4" roughness={0.65} /></mesh>
-            <mesh position={[0.24, 0.4, 0]} rotation={[0, 0, 0.32]} scale={[0.14, 0.58, 0.14]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#f8faf4" roughness={0.65} /></mesh>
-            <mesh position={[-0.15, -0.16, 0]} scale={[0.16, 0.48, 0.16]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#2f806b" roughness={0.6} /></mesh>
-            <mesh position={[0.15, -0.16, 0]} scale={[0.16, 0.48, 0.16]}><capsuleGeometry args={[0.5, 1, 8, 12]} /><meshStandardMaterial color="#2f806b" roughness={0.6} /></mesh>
-            <mesh position={[-0.15, -0.45, 0.03]} scale={[0.2, 0.1, 0.3]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#ffffff" roughness={0.5} /></mesh>
-            <mesh position={[0.15, -0.45, 0.03]} scale={[0.2, 0.1, 0.3]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#ffffff" roughness={0.5} /></mesh>
-            <mesh position={[0, 0.58, 0.34]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.16, 0.018, 8, 32, Math.PI * 1.7]} /><meshBasicMaterial color="#c47752" /></mesh>
-            <mesh position={[0, 0.48, 0.34]}><sphereGeometry args={[0.055, 12, 8]} /><meshStandardMaterial color="#c47752" metalness={0.4} /></mesh>
-          </group>
-          <Float speed={0.7} rotationIntensity={0.2} floatIntensity={0.22}>
-            <group position={[-1.48, 0.82, 0.5]} rotation={[0.15, 0.2, -0.55]}>
-              <mesh scale={[0.16, 0.46, 0.035]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" roughness={0.72} /></mesh>
-              <mesh position={[0.01, 0, 0.04]} rotation={[0, 0, Math.PI / 2]} scale={[0.018, 0.34, 0.012]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#3d795f" /></mesh>
-            </group>
-            <group position={[1.48, -0.72, 0.4]} rotation={[-0.2, -0.25, 0.55]}>
-              <mesh scale={[0.14, 0.42, 0.035]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#a8c99a" roughness={0.72} /></mesh>
-              <mesh position={[0.01, 0, 0.04]} rotation={[0, 0, Math.PI / 2]} scale={[0.016, 0.3, 0.012]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#3d795f" /></mesh>
-            </group>
-            <group position={[0.95, 1.18, -0.25]} rotation={[0.1, 0.3, 0.8]}>
-              <mesh scale={[0.11, 0.3, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#d0e5bb" roughness={0.72} /></mesh>
-              <mesh position={[0.01, 0, 0.04]} rotation={[0, 0, Math.PI / 2]} scale={[0.014, 0.22, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh>
-            </group>
-            <group position={[-0.7, 1.35, 0.2]} rotation={[0.1, 0.2, -0.3]}><mesh scale={[0.06, 0.45, 0.02]}><cylinderGeometry args={[1, 0.7, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh><mesh position={[-0.12, 0.2, 0]} rotation={[0, 0, -0.7]} scale={[0.08, 0.2, 0.03]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh><mesh position={[0.12, 0.04, 0]} rotation={[0, 0, 0.7]} scale={[0.08, 0.2, 0.03]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#a8c99a" /></mesh></group>
-            <group position={[0.7, 0.72, 0.1]} rotation={[0.2, -0.2, 0.4]}><mesh scale={[0.05, 0.38, 0.02]}><cylinderGeometry args={[1, 0.7, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh><mesh position={[-0.1, 0.14, 0]} rotation={[0, 0, -0.6]} scale={[0.07, 0.18, 0.03]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#d0e5bb" /></mesh><mesh position={[0.1, -0.02, 0]} rotation={[0, 0, 0.6]} scale={[0.07, 0.18, 0.03]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh></group>
-          </Float>
-          <Html position={[0.85, -1.35, 0.6]} center distanceFactor={5}>
-            <div className="orb-info-card"><span>Rooted in nature</span><strong>Simple care, thoughtfully chosen.</strong></div>
-          </Html>
-        </group>
-        <OrbitControls enableZoom={false} enablePan={false} enableRotate={!reducedMotion} rotateSpeed={0.22} />
-    </>
-  )
-}
 
 function WellnessOrb() {
   return <div className="wellness-orb-shell supplied-orbit-hero" aria-hidden="true"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Bdp0Osd6uwvo2eqq4q4hUX4WFhqD3q.png" alt="" className="supplied-orbit-image" /></div>

@@ -55,9 +55,9 @@ function GlobeScene() {
     <ambientLight intensity={1.6} />
     <directionalLight position={[3, 4, 5]} intensity={2.4} color="#fff6df" />
     <pointLight position={[-3, -2, 3]} intensity={2} color="#86bf91" />
-    <group ref={globe} position={[0, -0.72, 0]} scale={0.66}>
-      <mesh><sphereGeometry args={[1.48, 64, 64, 0, Math.PI * 2, 0, Math.PI / 2]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
-      <mesh scale={[1.01, 1.01, 1.01]}><sphereGeometry args={[1.48, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
+    <group ref={globe} position={[0, -0.24, 0]} scale={0.62}>
+      <mesh><sphereGeometry args={[1.48, 64, 64]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
+      <mesh scale={[1.01, 1.01, 1.01]}><sphereGeometry args={[1.48, 32, 32]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
       <DoctorKid />
       <group position={[-1.45, 0.25, 0.25]} rotation={[0.1, 0.3, -0.55]}><mesh scale={[0.16, 0.48, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c7dfa9" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, 0.2]} scale={[0.02, 0.38, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
       <group position={[1.38, -0.38, 0.25]} rotation={[-0.2, -0.25, 0.55]}><mesh scale={[0.14, 0.42, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, -0.2]} scale={[0.02, 0.34, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>

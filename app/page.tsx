@@ -35,7 +35,7 @@ function FallingLeaves() {
 }
 
 function DoctorKid() {
-  return <group position={[0, 1.78, 0.18]} scale={0.28}>
+  return <group position={[0, 1.08, 0.78]} scale={0.28}>
     <mesh position={[0, 0.98, 0]}><sphereGeometry args={[0.34, 28, 20]} /><meshStandardMaterial color="#efbd91" roughness={0.8} /></mesh>
     <mesh position={[-0.12, 1.02, 0.3]} scale={[0.035, 0.045, 0.018]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#263b35" /></mesh>
     <mesh position={[0.12, 1.02, 0.3]} scale={[0.035, 0.045, 0.018]}><sphereGeometry args={[1, 12, 8]} /><meshStandardMaterial color="#263b35" /></mesh>
@@ -64,11 +64,11 @@ function GlobeScene() {
     <group ref={globe} position={[0, -0.16, 0]} scale={0.78}>
       <mesh><sphereGeometry args={[1.48, 64, 64]} /><meshStandardMaterial color="#4f9871" roughness={0.38} metalness={0.04} /></mesh>
       <mesh scale={[1.01, 1.01, 1.01]}><sphereGeometry args={[1.48, 32, 32]} /><meshBasicMaterial color="#b6dfaa" wireframe transparent opacity={0.22} /></mesh>
-      <DoctorKid />
       <FallingLeaves />
       <group position={[-1.45, 0.25, 0.25]} rotation={[0.1, 0.3, -0.55]}><mesh scale={[0.16, 0.48, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#c7dfa9" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, 0.2]} scale={[0.02, 0.38, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
       <group position={[1.38, -0.38, 0.25]} rotation={[-0.2, -0.25, 0.55]}><mesh scale={[0.14, 0.42, 0.03]}><sphereGeometry args={[1, 16, 8]} /><meshStandardMaterial color="#b8d9a8" /></mesh><mesh position={[0, 0, 0.04]} rotation={[0, 0, -0.2]} scale={[0.02, 0.34, 0.01]}><cylinderGeometry args={[1, 1, 1, 8]} /><meshStandardMaterial color="#477f62" /></mesh></group>
     </group>
+    <DoctorKid />
     <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.35} enableDamping dampingFactor={0.08} />
   </>
 }

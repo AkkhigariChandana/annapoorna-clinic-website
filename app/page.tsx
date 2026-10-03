@@ -82,7 +82,25 @@ function GlobeScene() {
 }
 
 function WellnessOrb() {
-  return <div className="wellness-orb-shell supplied-orbit-hero" aria-label="Doctor talking with a patient in the Annapoorna clinic"><img className="supplied-orbit-image" src="/images/annapoorna-clinic-care.png" alt="Doctor talking with a patient in a warm Annapoorna clinic room" /></div>
+  const [burst, setBurst] = useState(false)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const handleBurst = () => {
+    if (burst) return
+    setBurst(true)
+    timeoutRef.current = setTimeout(() => setBurst(false), 5000)
+  }
+
+  useEffect(() => () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+  }, [])
+
+  return <div className={`wellness-orb-shell supplied-orbit-hero ${burst ? 'is-burst' : ''}`} aria-label="Interactive clinic video">
+    <button className="hero-video-capsule" type="button" onClick={handleBurst} aria-label={burst ? 'Clinic video is playing' : 'Play clinic video'}>
+      <video className="hero-video" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gemini_generated_video_01de682b-EfihN6RLOkYqBBg3hmNnVBHwJO6D2E.mp4" autoPlay muted loop playsInline preload="metadata" />
+      <span className="hero-video-hint">Tap here</span>
+    </button>
+  </div>
 }
 
 function AnimatedStat({ value, suffix = '' }: { value: number; suffix?: string }) {

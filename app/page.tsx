@@ -87,10 +87,17 @@ function WellnessOrb() {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleBurst = () => {
-    if (burst) return
-    videoRef.current?.pause()
+    if (burst || !videoRef.current) return
+    videoRef.current.currentTime = 0
+    videoRef.current.play().catch(() => undefined)
     setBurst(true)
-    timeoutRef.current = setTimeout(() => setBurst(false), 5000)
+    timeoutRef.current = setTimeout(() => {
+      setBurst(false)
+      if (videoRef.current) {
+        videoRef.current.pause()
+        videoRef.current.currentTime = 0
+      }
+    }, 5000)
   }
 
   useEffect(() => () => {
